@@ -43,6 +43,7 @@ class AdminController extends Controller
     }
 
     public function manage(User $user) {
+
         $people = $user->people()->get();
         return view("admin.users.manage",compact("people"));
     }

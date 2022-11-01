@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Information;
+use App\Models\People;
 use App\Http\Requests\StoreRequest;
 
 class ListController extends Controller
 {
     public function index()
     {
-        $lists = Information::all();
+        $lists = People::all();
         return view("list.index", compact("lists"));
     }
 
@@ -18,24 +18,24 @@ class ListController extends Controller
     {
      $fields =$request->validated();
      $fields["user_id"] = auth()->id();
-         
-        Information::create($fields);
+
+        People::create($fields);
         return redirect("/")->with("message", "Added successfully");
     }
 
-    public function edit(Information $list)
+    public function edit(People $list)
     {
         return view("list.edit", compact("list"));
 
     }
 
-    public function update(Information $list,StoreRequest $request)
+    public function update(People $list, StoreRequest $request)
     {
       $list->update($request->Validated());
       return redirect("/");
     }
 
-    public function destroy(Information $list) {
+    public function destroy(People $list) {
         $list->delete();
         return redirect("/");
     }

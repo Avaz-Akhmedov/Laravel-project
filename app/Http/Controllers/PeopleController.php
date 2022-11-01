@@ -30,7 +30,7 @@ class PeopleController extends Controller
         return view("people.edit", compact("person"));
     }
 
-    // Update Person Information
+    // Update Person People
     public function update(People $person, StoreRequest $request)
     {
         $person->update($request->validated());

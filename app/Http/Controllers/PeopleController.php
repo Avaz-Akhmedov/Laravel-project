@@ -8,12 +8,14 @@ use App\Http\Requests\StoreRequest;
 
 class PeopleController extends Controller
 {
+    // List of all People
     public function index()
     {
         $people = People::all();
-        return view( "people.index", compact("people"));
+        return view("people.index", compact("people"));
     }
 
+    //Create Person
     public function store(StoreRequest $request)
     {
         $fields = $request->validated();
@@ -22,23 +24,27 @@ class PeopleController extends Controller
         return redirect("/")->with("message", "Added successfully");
     }
 
+    //Edit Person View
     public function edit(People $person)
     {
         return view("people.edit", compact("person"));
     }
 
+    // Update Person Information
     public function update(People $person, StoreRequest $request)
     {
         $person->update($request->validated());
         return redirect("/")->with("message", "Updated");
     }
 
+    // Delete Person
     public function destroy(People $person)
     {
         $person->delete();
         return redirect("/");
     }
 
+    // Manage People
     public function manage()
     {
         $people = auth()->user()->people()->get();

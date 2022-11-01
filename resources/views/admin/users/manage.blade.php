@@ -1,4 +1,4 @@
-<x-admin>
+<x-layout>
 
     <table class="w-full table-auto rounded-sm mt-28">
         @forelse($people as $person)
@@ -37,4 +37,4 @@
         @endforelse
     </table>
 
-</x-admin>
+</x-layout>

@@ -1,12 +1,12 @@
-<x-admin>
+<x-layout>
 
     <table class="text-left w-full mt-32">
         <thead class="bg-black flex text-white w-full">
         <tr class="flex  w-full mb-4">
-            <th class="p-4 w-1/4 uppercase">Name</th>
-            <th class="p-4 w-1/4 uppercase">Email</th>
-            <th class="p-4 w-1/4 uppercase">People</th>
-            <th class="p-4 w-1/4 uppercase">Actions</th>
+            <th class="p-4 w-1/4  uppercase">Name</th>
+            <th class="p-4 w-1/4  uppercase">Email</th>
+            <th class="p-4 w-1/4  uppercase">People</th>
+            <th class="p-4 w-1/4  uppercase">Actions</th>
         </tr>
         </thead>
 @forelse($users as $user)
@@ -38,5 +38,4 @@
                 </td>
         @endforelse
     </table>
-
-</x-admin>
+</x-layout>

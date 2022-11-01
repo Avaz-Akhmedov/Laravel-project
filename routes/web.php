@@ -25,7 +25,7 @@ Route::get("/", [PeopleController::class, "index"]);
 
 //Admin routes
 Route::group(["middleware" => ["is_admin","auth"],"prefix" => "admin"],function () {
-    Route::get("/",[AdminController::class,"index"]);
+    Route::get("/",[PeopleController::class,"index"]);
 
     Route::get("/users/{user}/people",[AdminController::class,"manage"]);
     Route::get("/users",[AdminController::class,"users"]);
@@ -40,6 +40,7 @@ Route::group(["middleware" => ["is_admin","auth"],"prefix" => "admin"],function 
 
 //People Routes
 Route::group(["middleware" => "auth","prefix" => "people"], function () {
+
     //Manage
     Route::get("/manage", [PeopleController::class, "manage"]);
 

@@ -31,14 +31,19 @@ class AuthController extends Controller
         return redirect("/");
     }
 
-    public function login(SimpleRequest $request)
+    public function login(SimpleRequest $request,)
     {
         if (!Auth::attempt($request->validated())) {
-            return back()->with("message", "Invalid credentials");
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(["password" => "Wrong password"],);
+
         }
+
         if (auth()->user()->is_admin == 1) {
-            return  redirect("/admin");
+            return redirect("/admin");
         }
-        return  redirect("/");
+
+        return redirect("/");
     }
 }

@@ -1,10 +1,10 @@
 <x-layout>
 
-    <table class="w-full table-auto rounded-sm mt-28">
+    <table class="w-full table-auto rounded-sm mt-28 ">
         @forelse($people as $person)
-            <tbody>
+            <tbody >
             <tr class="border-gray-300">
-                <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
+                <td class="px-4 py-8 border-t border-b border-gray-300 text-lg ">
                     <p class="text-2xl font-semibold">
                         {{$person->name}}
                     </p>
@@ -31,7 +31,7 @@
             <tr class="border-gray-300">
                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                     <p class="text-xl font-semibold text-center">
-                        You don't have people
+                       This user doesn't have people
                     </p>
                 </td>
         @endforelse

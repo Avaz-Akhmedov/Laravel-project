@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\People;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
 
 class PeopleController extends Controller
@@ -21,7 +20,7 @@ class PeopleController extends Controller
         $fields = $request->validated();
         $fields["user_id"] = auth()->id();
         People::create($fields);
-        return redirect("/")->with("message", "Added successfully");
+        return redirect("/");
     }
 
     //Edit Person View
@@ -34,7 +33,7 @@ class PeopleController extends Controller
     public function update(People $person, StoreRequest $request)
     {
         $person->update($request->validated());
-        return redirect("/")->with("message", "Updated");
+        return redirect("/");
     }
 
     // Delete Person
@@ -43,6 +42,7 @@ class PeopleController extends Controller
         $person->delete();
         return redirect("/");
     }
+
 
     // Manage People
     public function manage()

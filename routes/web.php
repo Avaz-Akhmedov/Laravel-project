@@ -4,65 +4,52 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
-
 
 
 Route::get("/", [PeopleController::class, "index"]);
 
 
 //Admin routes
-Route::group(["middleware" => ["is_admin","auth"],"prefix" => "admin"],function () {
-    Route::get("/",[PeopleController::class,"index"]);
+Route::group(["middleware" => ["is_admin", "auth"], "prefix" => "admin"], function () {
+    Route::get("/", [PeopleController::class, "index"]);
 
-    Route::get("/users/{user}/people",[AdminController::class,"manage"]);
-    Route::get("/users",[AdminController::class,"users"]);
+    Route::get("/users/{user}/people", [AdminController::class, "manage"]);
+    Route::get("/users/registered", [AdminController::class, "users"]);
 
-    Route::get("/users/{user}/edit",[AdminController::class,"edit"]);
-    Route::patch("/users/{user}/edit",[AdminController::class,"update"]);
+    Route::get("/users/{user}/edit", [AdminController::class, "edit"]);
+    Route::patch("/users/{user}/edit", [AdminController::class, "update"]);
 
-    Route::delete("/users/{user}",[AdminController::class,"destroy"]);
+    Route::delete("/users/{user}", [AdminController::class, "destroy"]);
 
 });
 
 
 //People Routes
-Route::group(["middleware" => "auth","prefix" => "people"], function () {
+Route::group(["middleware" => "auth"], function () {
 
-    //Manage
-    Route::get("/manage", [PeopleController::class, "manage"]);
+    Route::prefix("/people")->group(function () {
+        //Manage
+        Route::get("/manage", [PeopleController::class, "manage"]);
 
-//Create
-    Route::view("/create", "people.create");
-    Route::post("/create", [PeopleController::class, "store"]);
+        //Create
+        Route::view("/create", "people.create");
+        Route::post("/create", [PeopleController::class, "store"]);
 
-//Edit
-    Route::get("/{person}/edit", [PeopleController::class, "edit"]);
-    Route::patch("/{person}/edit", [PeopleController::class, "update"]);
+        //Edit
+        Route::get("/{person}/edit", [PeopleController::class, "edit"]);
+        Route::patch("/{person}/edit", [PeopleController::class, "update"]);
 
-//Delete
-    Route::delete("/{person}", [PeopleController::class, "destroy"]);
-});
-
-
-
-//Logout
-Route::post("/logout", [AuthController::class, "logout"])->middleware("auth");
+        //Delete
+        Route::delete("/{person}", [PeopleController::class, "destroy"]);
+    });
 
 
-Route::group(["middleware" => "guest"],function () {
+    //Logout
+    Route::post("/logout", [AuthController::class, "logout"]);
+});;
+
+
+Route::group(["middleware" => "guest"], function () {
 
     //Register
     Route::view("/register", "auth.register");
